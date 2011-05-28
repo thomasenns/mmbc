@@ -1,0 +1,14 @@
+<div data-role="page" id="directions-show" style="width:100%; height:100%;">
+<%= render 'partials/header' %>
+<div data-role="content">
+<%= render 'partials/user_information' %>
+
+<ul data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-controlgroup ui-controlgroup-vertical ui-shadow">
+<li data-role="list-divider">Google</li>
+<li>
+<%= link_to 'Google Map', user_route_map_path(current_user.id,@route) %>
+</li>
+</ul>
+
+</div>
+</div>

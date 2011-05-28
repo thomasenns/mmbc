@@ -1,0 +1,21 @@
+<div data-role="page" id="governments_index" style="width:100%; height:100%;">
+<div data-role="header">
+<div class="ui-title-frontpage">
+<h2>Map My Bike Commute</h2>
+</div>
+</div>
+
+<div data-role="content">
+<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<li><%= devise_error_messages! %></li>
+<li><%= f.label :name %><%= f.text_field :name %></li>
+<li><%= f.label :email %><%= f.text_field :email %></li>
+<li><%= f.label :password %><%= f.password_field :password %></li>
+<li><%= f.label :password_confirmation %><%= f.password_field :password_confirmation %></li>
+<li><%= f.submit "Sign up" %></li>
+<% end %>
+<%= render :partial => "devise/shared/links" %>
+</ul>
+</div>
+</div>

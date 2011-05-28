@@ -1,0 +1,59 @@
+// Place your application-specific JavaScript functions and classes here
+// This file is automatically included by javascript_include_tag :defaults
+var mapGoogleModule = function(){
+	
+	var name = 'Thomas';
+	
+	function initMap(){
+			
+		var map = null;
+		
+		alert(getLatLngBndsSWy());
+		alert(getLatLngBndsSWx());
+		alert(getLatLngBndsNEy());
+		alert(getLatLngBndsNEx());
+
+	      	var mapOptions = {
+	        	mapTypeId: google.maps.MapTypeId.TERRAIN
+	      	};
+	      	
+	      	map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+	
+		var LatLngSW = new google.maps.LatLng(getLatLngBndsSWy(), getLatLngBndsSWx());
+		var LatLngNE = new google.maps.LatLng(getLatLngBndsNEy(), getLatLngBndsNEx());
+		var LatLngBnds = new google.maps.LatLngBounds(LatLngSW,LatLngNE);
+		
+		map.fitBounds(LatLngBnds);
+	}
+				
+	function getLatLngBndsSWx() {
+	  return <%= sanitize(@LatLngBndsSWx.to_json) %>;
+	}
+	
+	function getLatLngBndsSWy() {
+	  return <%= sanitize(@LatLngBndsSWy.to_json) %>;
+	}
+
+	function getLatLngBndsNEx() {
+	  return <%= sanitize(@LatLngBndsNEx.to_json) %>;
+	}
+
+	function getLatLngBndsNEy() {
+	  return <%= sanitize(@LatLngBndsNEy.to_json) %>;
+	}
+	
+	return{
+	  init: initMap,
+	  LatLngBndsSWx: getLatLngBndsSWx,
+	  LatLngBndsSWy: getLatLngBndsSWy,
+	  LatLngBndsNEx: getLatLngBndsNEx,
+	  LatLngBndsNEy: getLatLngBndsNEy
+	}
+}();
+
+
+$('#mapShow').live('pageshow',function(){
+
+mapGoogleModule.init();
+	
+});

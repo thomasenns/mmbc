@@ -1,0 +1,25 @@
+<div data-role="page" id="governments_index" style="width:100%; height:100%;">
+<div data-role="header">
+<div class="ui-title-frontpage">
+<h2>Map My Bike Commute</h2>
+</div>
+</div>
+
+<div data-role="content">
+<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+<li>Edit <%= resource_name.to_s.humanize %></li>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<li><%= devise_error_messages! %></li>
+<li><%= f.label :name %><%= f.text_field :name %></li>
+<li><%= f.label :email %><%= f.text_field :email %></li>
+<li><%= f.label :password %> (leave blank if you don't want to change it)<%= f.password_field :password %></li>
+<li><%= f.label :password_confirmation %><%= f.password_field :password_confirmation %></li>
+<li><%= f.label :current_password %>(we need your current password to confirm your changes)<%= f.password_field :current_password %></li>
+<li><%= f.submit "Update" %></li>
+<% end %>
+<li>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</li>
+<%= link_to "Back", :back %>
+</ul>
+
+</div>
+</div>

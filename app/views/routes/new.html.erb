@@ -1,0 +1,222 @@
+<div data-role="page" id="routes-new">
+
+    <script type="text/javascript">
+       
+	var mapNew;
+	var optionsNew;
+	var geocoderNew;
+
+	var wayPoint = function() {
+
+		function constructor(action){
+			alert (action);
+
+		}
+
+		return{
+			constructor: constructor
+		}
+	}(); 
+    	 
+    	$('#addWayPoint').click(function() {			
+		var element = $("#clone").clone().attr('id', 'clone2');
+		$("#WayPointsGroup").append(element);		
+	});
+    	        
+        
+     	$('#routes-new').live("pagecreate", function() {
+		document.getElementById("route_name").value = "R100";
+		document.getElementById("route_begin_text").value = "1305 Delbruck Ave, North Vancouver, BC";
+		document.getElementById("route_end_text").value = "4330 Kingsway, Burnaby, BC";	
+		
+		document.getElementById("map-new").style.height = $(document).height() - 120 +'px';
+		
+	   	var latlng = new google.maps.LatLng(-34.397, 150.644);
+		optionsNew = {
+				zoom: 16,
+				center: latlng,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+
+			geocoderNew = new google.maps.Geocoder();
+		mapNew = new google.maps.Map(document.getElementById("map-new"), optionsNew);
+		
+		// Create the DIV to hold the control and call the HomeControl() constructor
+		  // passing in this DIV.
+		  var homeControlDiv = document.createElement('DIV');
+		  var homeControl = new HomeControl(homeControlDiv, mapNew);
+		
+		  homeControlDiv.index = 1;
+  mapNew.controls[google.maps.ControlPosition.TOP_RIGHT].push(homeControlDiv);
+		
+	});
+
+	$('#routes-new').live('pageshow',function(){
+		
+			
+				
+        });
+        
+        function geoCodePoint(element)
+        {
+        	var address = document.getElementById(element).value;
+        	       	
+        	
+        	geocoderNew.geocode( { 'address': address}, function(results, status) {
+				      if (status == google.maps.GeocoderStatus.OK) {
+				        mapNew.setCenter(results[0].geometry.location);
+				        var marker = new google.maps.Marker({
+				            map: mapNew, 
+				            position: results[0].geometry.location
+				        });
+				      } 
+		    		});
+		    		
+		
+		scrollToMap();
+        }
+        
+        function scrollToMap()
+        {
+        	var elementMap = $("#map-top").offset();
+		$("html, body").animate({scrollTop: elementMap.top}, {duration:500, easing:"linear"});
+        }
+        
+        function scrollToHeader()
+	{
+	        var elementHeader = $("#top").offset();
+		$("html, body").animate({scrollTop: elementHeader.top}, {duration:500, easing:"linear"});
+        }
+        
+        function HomeControl(controlDiv, map) {
+	
+	  // Set CSS styles for the DIV containing the control
+	  // Setting padding to 5 px will offset the control
+	  // from the edge of the map
+	  controlDiv.style.padding = '5px';
+	
+	  // Set CSS for the control border
+	  var controlUI = document.createElement('DIV');
+	  controlUI.style.backgroundColor = 'white';
+	  controlUI.style.borderStyle = 'solid';
+	  controlUI.style.borderWidth = '2px';
+	  controlUI.style.cursor = 'pointer';
+	  controlUI.style.textAlign = 'center';
+	  controlUI.title = 'Click to set the map to Home';
+	  controlDiv.appendChild(controlUI);
+	
+	  // Set CSS for the control interior
+	  var controlText = document.createElement('DIV');
+	  controlText.style.fontFamily = 'Arial,sans-serif';
+	  controlText.style.fontSize = '12px';
+	  controlText.style.paddingLeft = '4px';
+	  controlText.style.paddingRight = '4px';
+	  controlText.innerHTML = 'Directions';
+	  controlUI.appendChild(controlText);
+	
+	  // Setup the click event listeners: simply set the map to Chicago
+	  google.maps.event.addDomListener(controlUI, 'click', function() {
+	    map.setCenter(chicago)
+	  });
+}
+
+    </script> 
+
+<div id="top"></div>
+
+<%= render 'partials/header' %>
+
+<div data-role="content">
+   
+
+<div data-role="collapsible" data-collapsed="true">
+<h3>Global Positioning System</h3>
+<ul data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-controlgroup ui-controlgroup-vertical ui-shadow">
+<div class="ui-body ui-body-c">
+<div data-role="controlgroup" data-type="horizontal">
+<button id="gpsRecord" type="button">&#8226</button>
+<button id="gpsPause" type="button">||</button>
+<button id="gpsStop" type="button">&#9002</button>
+<button id="gpsPlay" type="button">></button>
+</div>
+</div>
+</ul>
+
+</div>
+
+
+<div data-role="collapsible">
+<h3>General Information</h3>
+<ul data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-controlgroup ui-controlgroup-vertical ui-shadow">
+<li data-role="list-divider">General Information</li>
+
+
+<div class="ui-body ui-body-c">
+<%= form_for [@user, @route] do |f| %>
+
+<div data-role="controlgroup" data-type="horizontal">
+<button id="addWayPoint" type="button">W</button>
+<%= f.submit :"Save" %>
+</div>
+
+<div data-role="fieldcontain">
+    <label for="route_name">Name:</label>
+    <%= f.text_field :name, :id => "route_name" %>
+</div>
+
+
+
+<div data-role="fieldcontain">
+	<label for="route_begin_text">A:</label>
+	<%= f.text_field :begin_text, :id => "route_begin_text" %>
+	<a id="gcBeginPoint" data-role="button" data-iconpos="notext" data-icon="gear" onclick="geoCodePoint('route_begin_text')"></a>
+	<a data-role="button" data-iconpos="notext" data-icon="arrow-d"></a>
+	
+ 
+</div>
+
+<div id="WayPointsGroup">
+
+<div data-role="fieldcontain" id="clone">       
+    	<label for="waypoint">W1:</label>   
+    	<%= text_field_tag 'waypoint' %>
+    	<a id="gcWayPoint" data-role="button" data-iconpos="notext" data-icon="gear" onclick="geoCodePoint('route_begin_text')"></a>
+    	<a data-role="button" data-iconpos="notext" data-icon="arrow-u"></a>
+	<a data-role="button" data-iconpos="notext" data-icon="arrow-d"></a>
+	<a data-role="button" data-iconpos="notext" data-icon="delete"></a>
+	
+</div>
+</div>
+
+<div data-role="fieldcontain">
+    	<label for="route_end_text">B:</label>
+    	<%= f.text_field :end_text , :id => "route_end_text"%>
+    	<a id="gcEndPoint" data-role="button" data-iconpos="notext" data-icon="gear" onclick="geoCodePoint('route_end_text')"></a>
+    	<a type="button" data-role="button" data-iconpos="notext" data-icon="arrow-u"></a>
+	
+</div>
+
+
+
+
+
+
+<% end %>
+</div>
+</ul>
+
+</div>
+
+<ul id="google" style="display:none" data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-controlgroup ui-controlgroup-vertical ui-shadow">
+<li data-role="list-divider">Google</li>
+<li>
+   <%= link_to 'Directions', new_directions_path %>
+</li>
+</ul>
+
+<div id="map-top"></div>
+
+<div id="map-new" style="width:75%;"></div> 
+
+</div>
+</div>

@@ -1,0 +1,47 @@
+<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+<li>
+<%= render 'devise/menu/route_items' %>
+</li>
+<% @routes.each do |route| %>
+<li>
+<%= link_to route.name, user_route_path(current_user.id,route) %>
+</li>
+<% end %>
+<li >
+<%= link_to 'New Route', new_user_route_path %>
+</li>
+<%= form_for [@user, @route] do |f| %>
+<li>
+Name
+<%= f.text_field :name, :id => "route_name" %>
+</li>
+<li >
+<div id="route_title">Beginning Point</div>
+<%= f.text_field :begin_text, :id => "route_begin_text" %>
+</li>
+<li >
+<button type="button" onclick="addWayPointBefore('route_begin')">ADD WAY POINT BELOW</button>	
+</li>
+<li>
+<div id="route_title">Ending Point</div>
+<%= f.text_field :end_text%>
+</li>
+<li >
+<button type="button" onclick="addWayPointBefore('route_end')">ADD WAY POINT ABOVE</button>	
+</li>
+<%=  hidden_field_tag :routes_geo, params['routes_geo'] %>
+<%=  hidden_field_tag :legs_geo, params['legs_geo'] %>
+<li>
+<%= f.submit %>
+<button type="button" onclick="calcRoute()">MAP MY BIKE COMMUTE</button>
+</li>  
+<% end %>
+<li>
+<%= link_to 'World', governments_path %>
+</li> 
+<% @governments.each do |government| %>
+<li> 
+<%= link_to government.name, government %>
+</li>
+<% end %>
+</ul>

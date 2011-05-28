@@ -1,0 +1,64 @@
+<div id="page-container">
+<div id="user_info"><%= render 'partials/user_information' %></div>
+	
+	<div id="header"><%= render 'partials/header' %></div>
+
+	<div id="navigation">
+	<ul>
+	 <li class="link_my_rides">
+	  <%= render 'devise/menu/route_items' %>
+	 </li>
+	 <% @routes.each do |route| %>
+         <li class="link_route">
+         <%= link_to route.name, user_route_path(current_user.id,route) %>
+         </li>
+         <% if route == @route %>
+          <li class="link_edit"> 
+	 	 	 	  <%= link_to 'Edit Route', edit_user_route_path(current_user.id,route) %>
+	 	 	 	 </li>
+	 	 	          <li class="link_destroy">
+	 	 	 	  <%= link_to 'Delete Route', user_route_path(current_user.id,route), :confirm => 'Are you sure?', :method => :delete %>
+	          </li>
+         <li class="link_sections"> 
+    	 	   <%= link_to 'Sections', user_route_sections_path(current_user.id,route) %>
+    	 	  </li>
+    	 	      <li class="link_time_lines"> 
+    	 	  	 	  	  	  <%= link_to 'Time Lines', user_route_time_lines_path(current_user.id,route) %>
+	 </li>
+	  <% @time_lines.each do |time_line| %>
+	 
+	  <% if time_line == @time_line %>
+	   <li class="link_selected_large"> 
+	  	   <%= link_to time_line.name, user_route_time_line_path(current_user.id,route,time_line) %>
+	  </li>
+	  	  <li  class="link_edit">
+	  	   <%= link_to 'Edit Time Line', edit_user_route_time_line_path %>
+	  	  </li>
+	  	  <li  class="link_destroy">
+	  	   <%= link_to 'Delete Time Line', user_route_time_line_path(current_user.id, route), :confirm => 'Are you sure?', :method => :delete %>
+	            </li>
+	            <%else%>
+	             <li class="link_time_line"> 
+		    	   <%= link_to time_line.name, user_route_time_line_path(current_user.id,route,time_line) %>
+	  </li>
+	 <% end %>
+	  <% end %>
+	 <% end %>
+         <% end %>
+	 <li class="link_world">
+        <%= link_to 'World', governments_path %>
+         </li> 
+	<% @governments.each do |government| %>
+        <li  class="link_governments"> 
+         <%= link_to government.name, government %>
+        </li>
+	<% end %>
+        </ul>
+        
+        </div>
+	
+	
+	<div id="map_canvas"></div>	
+	<div id="footer"><%= render 'partials/footer' %></div>
+	
+</div>

@@ -1,0 +1,24 @@
+	<% if user_signed_in? %>
+	 <li>
+	  <%= render 'devise/menu/route_items' %>
+	 </li> 
+	  <% end %>
+	 <li>
+        <%= link_to 'World', governments_path %>
+         </li> 
+	<% @governments.each do |government| %>
+	 <% if government == @government %>
+          <li> 
+           <%= link_to government.name, government %>
+          </li>
+	  <li> 
+	   <%= link_to 'Sections', government_sections_path(government) %>
+	  </li>
+	  <% else %>
+	   <li> 
+	    <%= link_to government.name, government %>
+           </li>
+	 <% end %>
+	<% end %>	
+	<div id="map_canvas"></div>	
+	

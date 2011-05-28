@@ -1,0 +1,34 @@
+<% @routes.each do |route| %>
+<% if route == @route %>
+<li>
+<%= link_to route.name, user_route_path(current_user.id,route) %>
+</li>
+<li> 
+<%= link_to 'Edit Route', edit_user_route_path(current_user.id,route) %>
+</li>
+<li>
+<%= link_to 'Delete Route', user_route_path(current_user.id,route), :confirm => 'Are you sure?', :method => :delete %>
+</li>
+<li> 
+<%= link_to 'Sections', user_route_sections_path(current_user.id,route) %>
+</li>
+<% @sections.each do |section| %>
+<li> 
+<%= link_to section.name + " " + section.instructions + " " + section.distance, user_route_section_path(current_user.id,route,section) %>
+</li>
+<% end %>
+<li>
+<%= link_to 'New Section', new_user_route_section_path %>
+</li>
+<li> 
+<%= link_to 'Time Lines', user_route_time_lines_path(current_user.id,route) %>
+</li>
+<% else%>
+<li>
+<%= link_to route.name, user_route_path(current_user.id,route) %>
+</li>
+<% end %>
+<% end %>
+<li>
+<%= link_to 'New Route', new_user_route_path %>
+</li>

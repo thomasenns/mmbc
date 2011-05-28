@@ -1,0 +1,17 @@
+TimeLines#new
+<table>
+ <tr>
+   <td><%= link_to 'Home', governments_path %></td>
+   <td><%= link_to 'My Commutes', user_routes_path(current_user.id) %></td>
+   <td><%= link_to @route.name + ' Time Lines', user_route_time_lines_path(current_user.id,params[:route_id]) %></td>  
+ </tr>
+ <tr>
+  <%= form_for [@user, @route, @time_line] do |f| %>
+  <td><%= f.label :name %></td>
+  <td><%= f.text_field :name %></td>
+ </tr>
+ <tr>
+  <td><%= f.submit %></td>
+  <% end %>
+ </tr>
+</table>

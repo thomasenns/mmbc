@@ -1,0 +1,84 @@
+<div data-role="page" id="map-new" style="height:100%">
+	<script type="text/javascript">
+            
+        var mapNew;
+        var optionsNew;
+	var geocoderNew;
+	
+	/*var routeInformation = function() {
+	
+			function constructor(result){
+	
+				for(var r=0; r < result.routes.length; r++) {
+	
+					var route = result.routes[r];
+					
+					for(var i=0; i < route.overview_path.length; i++) {
+	
+					}
+					
+					
+				
+					for(var l=0; l < route.legs.length; l++) {
+						var leg = route.legs[l];
+						
+						for (var s=0; s < leg.steps.length;s++){
+							for (var i=0; i < leg.steps[s].path.length;i++){
+								
+							}
+						}
+					}
+				}							
+			}
+	
+			return{
+				constructor: constructor
+			}
+	    	}();*/
+
+	
+         
+        $('#map-new').live('pagecreate', function() {
+                              
+                document.getElementById("map_new").style.height = $(document).height() - 40 +'px';
+            	var latlng = new google.maps.LatLng(-34.397, 150.644);
+	       	 	optionsNew = {
+	        		zoom: 16,
+	         		center: latlng,
+	         		mapTypeId: google.maps.MapTypeId.ROADMAP
+	       		}
+			
+			geocoderNew = new google.maps.Geocoder();
+    			mapNew = new google.maps.Map(document.getElementById("map_new"), optionsNew);
+        });
+
+        $('#map-new').live('pageshow', function() {
+
+            	google.maps.event.trigger(mapNew, 'resize');
+            	mapNew.setOptions(optionsNew); 
+			
+		var address = <%= sanitize(@addressA.to_json) %>;   
+				
+		geocoderNew.geocode( { 'address': address}, function(results, status) {
+		      if (status == google.maps.GeocoderStatus.OK) {
+		        mapNew.setCenter(results[0].geometry.location);
+		        var marker = new google.maps.Marker({
+		            map: mapNew, 
+		            position: results[0].geometry.location
+		        });
+		      } 
+    		});
+
+        });
+
+    </script> 	
+
+
+    <div data-role="content" style="height:100%;margin:0;padding:0">
+    	<div data-role="header" id="header-map">
+	 <h1>Map My Bike Commute <i>Ride On</i></h1>
+   		</div>  
+    	<div id="map_new" style="height:100%;width:100%;">
+		</div> 
+	</div>
+</div>

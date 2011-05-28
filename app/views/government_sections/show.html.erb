@@ -1,0 +1,47 @@
+<div id="page-container">
+
+	<div id="user_info"><%= render 'partials/user_information' %></div>
+	
+	<div id="header"><%= render 'partials/header' %></div>
+	<div id="navigation">
+	<ul>
+	 <li class="link_my_rides">
+	  <%= render 'devise/menu/route_items' %>
+	 </li>
+	 <li class="link_world">
+          <%= link_to 'World', governments_path %>
+         </li> 
+	 <% @governments.each do |government| %>
+         <li class="link_governments"> 
+          <%= link_to government.name, government %>
+         </li>
+         <% if government == @government %>
+          <li class="link_sections"> 
+	   <%= link_to 'Sections', government_sections_path(government) %>
+	  </li>
+	  <% @sections.each do |section| %>
+
+	   
+	    
+	     <% if section == @section %>
+	      <li class="link_selected_large"> 
+	       <%= link_to section.name, government_section_path(government,section) %>
+              </li>
+	    
+	    <%else%>
+	     <li class="link_section"> 
+	      <%= link_to section.name, government_section_path(government,section) %>
+             </li>
+	    <% end %>
+	
+	  <% end %>
+	 <% end %>
+	 <% end %>
+        </ul>
+        
+        </div>
+	
+	<div id="map_canvas"></div>	
+	<div id="footer"><%= render 'partials/footer' %></div>
+	
+</div>

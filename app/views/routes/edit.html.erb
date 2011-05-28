@@ -1,0 +1,50 @@
+<div id="page-container">
+	
+	<div id="user_info"><%= render 'partials/user_information' %></div>
+	
+	<div id="header"><%= render 'partials/header' %></div>
+	<div id="navigation">
+	<ul>
+	 <li class="link_my_rides">
+	  <%= render 'devise/menu/route_items' %>
+	 </li>
+	 <li class="link_routes"> 
+	  <%= link_to 'Routes', user_routes_path(@user)  %>
+	 </li>
+	 <% @routes.each do |route| %>
+         <% if route == @route %>
+         <li class="link_route">
+          <%= link_to route.name, user_route_path(current_user.id,route) %>
+         </li>
+	 <li class="link_selected_small"> 
+	  <%= link_to 'Edit Route', edit_user_route_path %>
+	 </li>
+	 <li class="link_destroy">
+	  <%= link_to 'Delete Route', user_route_path(current_user.id), :confirm => 'Are you sure?', :method => :delete %>
+         </li>
+	 <li class="link_sections"> 
+	  <%= link_to 'Sections', user_route_sections_path(current_user.id,route) %>
+	 </li>
+	 <li class="link_time_lines"> 
+	  <%= link_to 'Time Lines', user_route_time_lines_path(current_user.id,route) %>
+	 </li>
+	 <% else %>
+	  <li class="link_route">
+	   <%= link_to route.name, user_route_path(current_user.id,route) %>
+	  </li>
+	 <% end %>
+         <% end %>
+         <li class="link_world" >
+          <%= link_to 'World', governments_path %>
+         </li> 
+	 <% @governments.each do |government| %>
+         <li class="link_governments"> 
+          <%= link_to government.name, government %>
+         </li>
+	 <% end %>
+         </ul>
+        </div>
+	<div id="map_canvas"></div>	
+	<div id="footer"><%= render 'partials/footer' %></div>
+	
+</div>

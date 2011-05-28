@@ -1,0 +1,36 @@
+<div data-role="page" id="map-show" style="height:100%">
+	
+	<script type="text/javascript">
+            
+        var mapShow;
+        var optionsShow;
+         
+        $('#map-show').live('pagecreate', function() {
+                              
+                document.getElementById("map_show").style.height = $(document).height() - 40 +'px';
+            	var latlng = new google.maps.LatLng(43.6525, -79.3816667);
+	       	optionsShow = {
+	        	zoom: 8,
+	         	center: latlng,
+	         	mapTypeId: google.maps.MapTypeId.ROADMAP
+	       	}
+    		mapShow = new google.maps.Map(document.getElementById("map_show"), optionsShow);
+        });
+
+        $('#map-show').live('pageshow',function(){
+
+            google.maps.event.trigger(mapShow, 'resize');
+            mapShow.setOptions(optionsShow); 
+            
+        });
+
+    </script> 
+
+    <div data-role="content" style="height:100%;margin:0;padding:0">
+    <div data-role="header" id="header-map">
+	<h1>Map My Bike Commute <i>Ride On</i></h1>
+    </div>  
+    <div id="map_show" style="height:100%;width:100%;"></div> 
+
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div data-role="page" id="users-show">
+
+<%= render 'partials/header' %>
+
+<div data-role="content">
+<%= render 'partials/user_information' %>
+<% if user_signed_in? %>
+<ul data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-controlgroup ui-controlgroup-vertical ui-shadow"> 
+<li data-role="list-divider">My Commutes</li>
+<% @routes.each do |route| %>
+<li>
+<%= link_to route.name, user_route_path(current_user.id,route) %>
+</li>
+<% end %>
+<li>
+<%= link_to 'New Route', new_user_route_path(current_user.id) %>
+</li>
+</ul>
+<% end %>
+</div>
+</div>

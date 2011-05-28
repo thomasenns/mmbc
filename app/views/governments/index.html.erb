@@ -1,0 +1,21 @@
+<div data-role="page" id="governments_index" style="width:100%; height:100%;">
+<%= render 'partials/header' %>
+
+<div data-role="content">
+<%= render 'partials/user_information' %>
+<% if user_signed_in? %>
+<ul data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-controlgroup ui-controlgroup-vertical ui-shadow"> 
+<%= render 'partials/my_commutes' %>
+</ul>
+<% end %>
+<ul data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-controlgroup ui-controlgroup-vertical ui-shadow">  
+<li data-role="list-divider">World</li> 
+<% @governments.each do |government| %>
+<li> 
+<%= link_to government.name, government %>
+</li>
+<% end %>
+</ul> 
+</div>
+
+</div>

@@ -1,0 +1,46 @@
+<div data-role="page" id="routes-index">
+<div id="page-container">
+
+ <script type="text/javascript">
+        
+        $('.routes-index').live("pagecreate", function() {
+            
+            alert ("pagecreate");
+
+        });
+
+        $('.routes-index').live('pageshow',function(){
+
+	    alert ("pageshow");
+            
+        });
+
+</script> 
+
+	<div id="user_info"><%= render 'partials/user_information' %></div>
+	
+	<div id="header"><%= render 'partials/header' %></div>
+	<div id="navigation">
+	<ul>
+	 <li class="link_my_rides">
+	  <%= render 'devise/menu/route_items' %>
+	 </li>
+	 <% @routes.each do |route| %>
+         <li class="link_route">
+          <%= link_to route.name, user_route_path(current_user.id,route) %>
+         </li>
+         <% end %>
+         <li class="link_new">
+          <%= link_to 'New Route', new_user_route_path %>
+         </li>
+	 <li class="link_world">
+          <%= link_to 'World', governments_path %>
+         </li>
+        </ul>
+        </div>
+
+	<div id="map_canvas"></div>	
+	
+</div>
+
+</div>

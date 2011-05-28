@@ -1,0 +1,354 @@
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	background: rgb(0,0,0);
+	height: 100%;
+}
+
+
+a {
+  	text-decoration: none;
+  	color: rgb(150,150,150);
+}
+
+ul {
+	margin: 0em;
+	padding: 0em;
+	border: none;
+}
+
+#page-container {
+	width:100%;
+	height:100%;
+	margin:0 auto;
+	text-align: left;
+        background: rgb(0,0,0);
+        color: rgb(150,150,150);
+}
+
+#user_info {
+ 	padding: 0.5em;  
+	border:0.1em solid rgb(20,135,33);
+	height: 2.5em;
+	background: rgb(30,30,30);
+	color: rgb(20,135,33);
+	text-align:right;
+}
+
+.link_user_name {
+	display: block;
+	font-size: 14px;
+}
+
+.link_user_items {
+	display: block;
+	font-size: 12px;
+}
+
+#header {
+	padding: 0.5em;
+        border:0.1em solid rgb(20,135,33);
+	background: rgb(30,30,30);
+	color: rgb(20,135,33);
+	text-align:center;
+}
+
+
+#controls{
+	border:0.1em solid rgb(20,135,33);
+	margin-bottom: 0.5em;
+	background: rgb(50,50,50);
+}
+
+#navigation {
+	background: rgb(50,50,50);
+	border:0.1em solid rgb(20,135,33);
+	//visibility:hidden;
+}
+
+#navigation li {
+	border:1px solid rgb(65,65,65);
+}
+
+#navigation li a {
+	padding: 4px 4px 4px 4px;
+}
+
+
+.link_selected_route {
+	background-color: rgb(20,135,33);
+}
+
+.link_selected_xlarge {
+	background-color: rgb(20,135,33);
+	font-size: 30px;
+}
+
+
+.link_selected_xlarge a {
+	color: rgb(0,0,0);
+}
+
+.link_selected_large {
+	overflow:hidden;
+	background-color: rgb(20,135,33);
+	font-size: 24px;
+}
+
+.link_selected_large a {
+	color: rgb(0,0,0);
+}
+
+.link_selected_medium {
+	display: block;
+	background-color: rgb(20,135,33);
+	font-size: 18px;
+}
+
+.link_selected_medium a {
+	color: rgb(0,0,0);
+}
+
+.link_selected_small {
+	display: block;
+	background-color: rgb(20,135,33);
+	font-size: 18px;
+}
+
+.link_selected_small a {
+	color: rgb(0,0,0);
+}
+
+.link_new {
+	background-color: rgb(200,200,200);
+	font-size: 18px;
+}
+
+.link_new:hover {
+        display:block;
+	border:0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_new a {
+	color: rgb(20,135,33);
+}
+
+.link_edit {
+	background-color: rgb(255,255,255);
+	font-size: 18px;
+}
+
+.link_edit:hover {
+        display:block;
+	border:0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_edit a{
+	color: rgb(0,0,255);
+}
+
+.link_destroy{
+	background-color: rgb(255,255,255);
+	font-size: 18px;
+}
+
+.link_destroy:hover {
+        display:block;
+	border:0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_destroy a {
+	color: rgb(255,0,0);
+}
+
+
+.link_my_rides {
+	background-color: rgb(100,100,100);
+	font-size: 30px;
+}
+
+.link_my_rides:hover {
+        display:block;
+	border:0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_my_rides a {
+	color: rgb(0,0,0);
+}
+
+.link_routes{
+	color: black;
+	background-color: rgb(200,200,200);
+	font-size: 24px;
+}
+
+.link_routes:hover {
+        display:block;
+	border: 0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_routes a {
+	color: rgb(0,0,0);
+}
+
+.link_route{
+	color: black;
+	background-color: rgb(200,200,200);
+	font-size: 24px;
+	font-family:"Times New Roman";
+}
+
+.link_route:hover {
+        display:block;
+	border:0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_route a {
+	color: rgb(0,0,0);
+}
+
+.link_sections{
+	color: black;
+	background-color: rgb(255,255,255);
+	font-size: 18px;
+}
+
+.link_sections:hover {
+        display:block;
+	border:0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_sections a {
+	color: rgb(0,0,0);
+}
+
+.link_section{
+	color: black;
+	background-color: rgb(200,200,200);
+	font-size: 18px;
+}
+
+.link_section a {
+	color: rgb(0,0,0);
+}
+
+.link_section:hover {
+        display:block;
+	border:0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_time_lines{
+	color: black;
+	background-color: rgb(255,255,255);
+	font-size: 18px;
+}
+
+.link_time_lines:hover {
+        display:block;
+	border:1em solid;
+	border-color: rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_time_lines a {
+	color: rgb(0,0,0);
+}
+
+.link_time_line{
+	color: black;
+	background-color: rgb(200,200,200);
+	font-size: 18px;
+}
+
+.link_time_line a {
+	color: rgb(0,0,0);
+}
+
+
+.link_world {
+	background-color: rgb(100,100,100);
+	font-size: 30px;
+}
+
+.link_world:hover {
+        display:block;
+	border:0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_world a {
+	color: rgb(0,0,0);
+}
+
+.link_governments {
+	background-color: rgb(125,125,125);
+	font-size: 24px;
+}
+
+.link_governments:hover {
+        display:block;
+	border:0.1em solid rgb(0,0,0);
+	background-color: rgb(150,150,150);
+}
+
+.link_governments a {
+	color: rgb(0,0,0);
+}
+
+#button_map {
+	float:right;
+	margin: 0;
+	color: rgb(20,135,33);
+	background-color: rgb(0,0,0);
+	font-size: 22px;
+	font-family:"Times New Roman";
+	text-align:left;
+	border:none;
+}
+
+#button_map_section {
+	float:right;
+	margin: 0;
+	color: rgb(20,135,33);
+	background-color: rgb(0,0,0);
+	font-size: 16px;
+	font-family:"Times New Roman";
+	text-align:left;
+	border:none;
+}
+
+#map_canvas {
+	position:absolute;
+	left:0;
+	top:0;
+	visibility:hidden;
+	width:100%; 
+	height:100%;
+}
+
+#map_canvas_buttons{
+	position:absolute;
+	left:0;
+	top:0;
+	visibility:hidden;
+}
+
+#footer {
+	padding: 0.5em;
+	border:0.1em solid rgb(20,135,33);
+        clear: both;
+	height: 5em;
+	background: rgb(30,30,30);
+	color: rgb(20,135,33);
+}

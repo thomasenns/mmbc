@@ -1,0 +1,204 @@
+.route_name {
+	margin: 0;
+	padding: 0;
+	border:none;
+	background-color: rgb(255,255,255);
+}
+
+.route_begin {
+	margin: 0;
+	padding: 0;
+	border:none;
+	background-color: rgb(255,255,255);
+}
+
+.way_point {
+	margin: 0;
+	padding: 0;
+	border:none;
+	background-color: rgb(255,255,255);
+}
+
+.tools {
+	margin: 0;
+	padding: 0;
+	color: black;
+	background-color: rgb(255,255,255);
+	font-size: 12px;
+	border:none;
+	font-family:"Times New Roman";
+	color: rgb(0,0,0);
+	text-align:right;
+
+}
+
+.route_end {
+	margin: 0;
+	padding: 0;
+	border:none;
+	background-color: rgb(255,255,255);
+}
+
+.route_path {
+	margin: 0;
+	padding: 0;
+	border:none;
+}
+
+#link_route_buttons{
+	margin: 0;
+	padding: 0;
+}  
+  
+#route_title{
+	margin: 0;
+	padding: 0;
+	color: black;
+	background-color: rgb(255,255,255);
+	font-size: 10px;
+	font-family:"Times New Roman";
+	border:none;
+	width:100%;
+}  
+  
+#route_name {
+	margin: 0;
+	padding: 0;
+	color: black;
+	background-color: rgb(255,255,255);
+	font-size: 12px;
+	font-family:"Times New Roman";
+	border:none;
+	width:100%;
+}
+
+#route_name:focus {
+	outline:none;
+}
+
+#route_name_image {
+	margin: 0;
+	padding: 0;
+	border:none;	
+}
+
+#route_begin_text {
+	color: black;
+	background-color: rgb(255,255,255);
+	font-size: 12px;
+	font-family:"Times New Roman";
+	margin: 0;
+	padding: 0;
+	border:none;
+	width:100%;
+}
+
+#route_begin_text:focus {
+	outline:none;
+}
+
+
+
+#route_begin_image {
+	margin: 0;
+	padding: 0;
+	border:none;
+}
+
+#route_end_text {
+	margin: 0;
+	padding: 0;
+	color: black;
+	background-color: rgb(255,255,255);
+	font-size: 12px;
+	border:none;
+	font-family:"Times New Roman";
+	color: rgb(0,0,0);
+	width:100%;
+}
+
+#route_end_text:focus {
+	outline:none;
+}
+
+#route_end_image {
+	margin: 0;
+	padding: 0;
+	border:none;
+}
+
+#route_waypoint_text {
+	margin: 0;
+	padding: 0;
+	color: black;
+	background-color: rgb(255,255,255);
+	font-size: 12px;
+	border:none;
+	font-family:"Times New Roman";
+	color: rgb(0,0,0);
+	width:100%;
+}
+
+#route_path_text{
+	margin: 0;
+	padding: 0;
+	border:none;
+}
+
+#button_solve {
+	text-align:left;
+	margin: 0;
+	padding: 0;
+	font-family:"Times New Roman";
+	border:0.1em solid rgb(20,135,33);
+	font-size: 24px;
+	color: rgb(20,135,33);
+	width:100%;
+}
+
+#button_solve:hover{;
+	background-color: rgb(200,200,200);
+}
+
+#button_solve:active{
+	background-color: rgb(0,200,200);
+}
+
+
+#buttons_tools {
+	font-size: 12px;
+	font-family:"Times New Roman";
+	margin: 0;
+	padding: 6px;
+	border:none;
+	color: rgb(255,255,255);
+	background-color: rgb(0,0,0);
+	border:0.1em solid rgb(255,255,255);
+}
+
+#button_create {
+	display:none;	
+}
+
+#button_solve:active{
+	background-color: rgb(255,153,0);
+}
+
+#begin {
+	float: right;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#end {
+	float:right;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.link_route_solve {
+	display: block;
+        background-color: rgb(200,200,200);
+}

@@ -1,0 +1,171 @@
+<div data-role="page" class="routes-new">
+
+    <script type="text/javascript">
+    	
+    	var directionDisplay;
+	var directionsService = new google.maps.DirectionsService();
+
+	var ewktFunction = function(type) {
+		
+		this.points;
+		this.type = type;
+		
+		function constructor(){
+			this.points = '';
+		}
+		
+		function addPoint(lat,lng) {
+			this.points = this.points.concat(lng);
+			this.points = this.points.concat(' ');
+			this.points = this.points.concat(lat);
+			this.points = this.points.concat(',');
+		};
+
+		function toEWKT() {
+		
+			var ewkt = '';
+			if (this.type == "POINT"){
+				ewkt = 'SRID=4236;POINT(' + this.points.slice(0,-1) + ')';
+			}
+			else if (this.type == "LINESTRING"){
+				ewkt = 'SRID=4236;LINESTRING(' + this.points.slice(0,-1) + ')';
+			}
+			return ewkt;
+		}
+		
+		return{
+			constructor: constructor,
+			addPoint: addPoint,
+			toEWKT: toEWKT
+		}
+	}
+    
+    	var routeInformation = function() {
+    	
+    		function constructor(result){
+    		  			
+      			var routeArray = new Array(); 
+			for(var r=0; r < result.routes.length; r++) {
+							
+				var route = result.routes[r];
+				var overviewPathLineString = ewktFunction.constructor("LINESTRING");
+				for(var i=0; i < route.overview_path.length; i++) {
+					overviewPathLineString.addPoint(String(route.overview_path[i].lat()),String(route.overview_path[i].lng()));
+				}
+				var overviewPathEWKT = overviewPathLineString.toEWKT();
+														
+				var legsArray = new Array();
+				for(var l=0; l < route.legs.length; l++) {
+					var leg = route.legs[l];
+					var stepsArray = new Array();
+					for (var s=0; s < leg.steps.length;s++){
+						
+						var sectionLineString = ewktFunction.constructor("LINESTRING");
+						for (var i=0; i < leg.steps[s].path.length;i++){
+							sectionLineString.addPoint(String(leg.steps[s].path[i].lat()),String(leg.steps[s].path[i].lng()));
+						}
+						var sectionEWKT = sectionLineString.toEWKT();
+					
+						stepsArray[s] = leg.steps[s].distance.text + "<step>" + leg.steps[s].duration.text + "<step>" + leg.steps[s].end_location + "<step>" + leg.steps[s].instructions + "<step>" + leg.steps[s].start_location + "<step>" + sectionEWKT;
+					}
+
+				legsArray[l] = stepsArray.join("<steps>")
+				}
+							
+			routeArray[r] = route.copyrights + "<route>" + overviewPathEWKT + "<route>" + legsArray.join("<legs>");
+			
+			}
+		document.getElementById("routes_geo").value = routeArray.join("<routes>");
+		}
+		
+		return{
+			constructor: constructor
+		}
+    	}
+    
+    	$('#new_route').submit(function() {
+	     	var start = document.getElementById("route_begin_text").value;
+	     	var end = document.getElementById("route_end_text").value;
+	     
+	     	var request = {
+	     	origin:start, 
+	     	destination:end,
+	     	travelMode: google.maps.DirectionsTravelMode.BICYCLING 
+	     	};
+	     	
+	     	directionsService.route(request, function(response, status) {
+	     		if (status == google.maps.DirectionsStatus.OK) {
+	     		directionsDisplay.setDirections(response);
+	     		}
+		});
+	});
+        
+        $('.routes-new').live("pagecreate", function() {
+        	directionsDisplay = new google.maps.DirectionsRenderer();
+            	google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+		routeInformation.constructor(directionsDisplay.directions);
+		});          
+        });
+
+        $('.routes-new').live('pageshow',function(){
+		document.getElementById("route_name").value = "R100";
+		document.getElementById("route_begin_text").value = "1305 Delbruck Ave, North Vancouver, BC";
+		document.getElementById("route_end_text").value = "4330 Kingsway, Burnaby, BC";
+        });
+
+    </script> 
+
+<div data-role="content">
+
+
+<%= render 'partials/header' %>
+    
+<%= render 'partials/user_information' %>
+
+<ul data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-controlgroup ui-controlgroup-vertical ui-shadow">
+<%= render 'partials/my_commutes' %>
+<% @routes.each do |route| %>
+<li>
+<%= link_to route.name, user_route_path(current_user.id,route) %>
+</li>
+<% end %>
+
+<li data-role="list-divider">New Commute</li>
+</ul>
+
+<div class="ui-body ui-body-c">
+<%= form_for [@user, @route] do |f| %>
+
+<div data-role="fieldcontain">
+    <%= image_tag "route_name.png" %>
+    <%= f.text_field :name, :id => "route_name" %>
+</div>
+
+<div data-role="fieldcontain">
+    <%= image_tag "A.png" %>
+    <%= f.text_field :begin_text, :id => "route_begin_text" %>
+</div>
+
+<div data-role="fieldcontain">
+    <%= image_tag "B.png" %>
+    <%= f.text_field :end_text , :id => "route_end_text"%>
+</div>
+
+<%=  hidden_field_tag :routes_geo, params['routes_geo'] %>
+
+<div data-role="controlgroup" data-type="horizontal">
+
+<button id="directions_get" type="button">D</button>
+<button id="waypoint_add" type="button">W</button>
+
+<%= f.submit :"Create Commute" %>
+
+</div>
+<% end %>
+</div>
+
+<%= render 'partials/world' %>
+</div>
+
+
+</div>

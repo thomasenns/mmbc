@@ -1,0 +1,26 @@
+<div data-role="page" id="routes_show" style="width:100%; height:100%;">
+<div data-role="header">
+<div class="ui-title-frontpage">
+<h2>Map My Bike Commute</h2>
+</div>
+</div>
+
+<div data-role="content">
+	<p>Sign in</p>
+
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	  <p><%= f.label :email %><br />
+	  <%= f.text_field :email %></p>
+
+	  <p><%= f.label :password %><br />
+	  <%= f.password_field :password %></p>
+
+	  <% if devise_mapping.rememberable? -%>
+	    <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
+	  <% end -%>
+
+	  <p><%= f.submit "Sign in" %></p>
+	<% end %>
+
+	<%= render :partial => "devise/shared/links" %>
+</div>

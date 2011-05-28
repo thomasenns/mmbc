@@ -1,0 +1,42 @@
+<div data-role="page" id="routes-show" style="width:100%; height:100%;">
+
+<%= render 'partials/header' %>
+
+<div data-role="content">
+<%= render 'partials/user_information' %>
+<% if user_signed_in? %>
+<ul data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-controlgroup ui-controlgroup-vertical ui-shadow"> 
+<% @routes.each do |route| %>
+<% if route == @route %>
+<li data-role="list-divider"><%= route.name %></li>
+<li> 
+<%= route.begin_text %>
+</li>
+<li> 
+<%= route.end_text %>
+</li>
+<li> 
+<%= link_to 'Edit Route', edit_user_route_path %>
+</li>
+<li>
+<%= link_to 'Delete Route', user_route_path(current_user.id), :confirm => 'Are you sure?', :method => :delete %>
+</li>
+<li> 
+<%= link_to 'Time Lines', user_route_time_lines_path(current_user.id,route) %>
+</li>
+<li> 
+<%= link_to 'Sections', user_route_sections_path(current_user.id,route) %>
+</li>
+<li>
+<%= link_to 'Map', user_route_map_path(current_user.id,route) %>
+</li>
+<li>
+<%= link_to 'Google Directions', user_route_directions_path(current_user.id,route) %>
+</li>
+<% end %>
+<% end %>
+</ul>
+<% end %>
+</div>
+
+</div>
